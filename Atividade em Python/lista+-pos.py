@@ -1,6 +1,6 @@
 num =[]
 for pos in range(0,5):
-    num.append(int(input("Digite os valores: ")))
+    num.append(int(input(f"Digite um valor para posição {pos}: ")))
 print(f"Os números presentes são {num}")
 
 countmax=list()
