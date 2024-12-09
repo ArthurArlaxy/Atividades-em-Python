@@ -1,5 +1,5 @@
 num =[int(input('Digite um número: '))]
-
+print('Valor foi adicionado')
 
 while True:
     escolha = str(input('Deseja Continuar (S/N): ')).strip().upper()[0]
@@ -7,9 +7,13 @@ while True:
         n = int(input('Digite um número: '))
         if n not in num:
             num.append(n)
+            print('Valor foi adicionado')
+        else:
+            print('Valor repetido, não será adicionado')
     elif escolha == 'N':
         break
     else:
         print('Tente novamente.',end="")
-
+print(20*'=-')
+num.sort()
 print(num)

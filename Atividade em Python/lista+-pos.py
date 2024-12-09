@@ -5,7 +5,6 @@ print(f"Os números presentes são {num}")
 
 countmax=list()
 countmin=list()
-igual=list()
 
 for c,n in enumerate(num):
     if n == max(num):
@@ -24,4 +23,3 @@ else:
     print(f"O maior e menor número foi {n} e ele estava em todas as posiçôes : ",end="")
     for i in countmax:
         print(f'{i}',end='... ')
-
