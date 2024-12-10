@@ -5,13 +5,13 @@ while True:
     num.append(n)
     if n == 5:
         n5+=1
-    escolha = str(input('Deseja continuar [S/N]: '))
+    escolha = str(input('Deseja continuar [S/N]: '))[0]
     if escolha in 'Ss':
         continue
     elif escolha in 'Nn':
         break
     else:
-        escolha= str(input('Tente novamente. Deseja continuar [S/N]: '))
+        escolha= str(input('Tente novamente. Deseja continuar [S/N]: '))[0]
     if escolha in 'Nn':
         break
 num.sort(reverse=True)

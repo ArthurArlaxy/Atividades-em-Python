@@ -1,9 +1,9 @@
 exp=[]
 x = str(input('Digite a sua expressão: '))
 for c in x:
-    if c in'({[' :
+    if c =='(' :
         exp.append(c)
-    elif c in ')}]':
+    elif c == ')':
         if 0 != len(exp):
             exp.pop()
         else:
