@@ -36,6 +36,7 @@ for c,info in enumerate(pessoas):
 #decoração de terminal
 print(100*'-')
 #Informações que sevem ser mostradas
+print(f'As informações foram {pessoas}')
 print(f'Voce cadastrou {len(pessoas)} pessoas')            
 print(f'O maior peso foi {maipeso:.1f}Kg e quem tem esse peso é/são ',end='')
 for n in nomep:
