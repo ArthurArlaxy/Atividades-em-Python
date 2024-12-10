@@ -37,10 +37,10 @@ for c,info in enumerate(pessoas):
 print(100*'-')
 #Informações que sevem ser mostradas
 print(f'Voce cadastrou {len(pessoas)} pessoas')            
-print(f'O maior peso foi {maipeso:.1f}kg e quem tem esse peso é/são ',end='')
+print(f'O maior peso foi {maipeso:.1f}Kg e quem tem esse peso é/são ',end='')
 for n in nomep:
     print(f'{n}',end=' ')
 print(' ')
-print(f'O menor peso foi {menpeso:.1f}kg e quem tem esse peso é/são ',end='')
+print(f'O menor peso foi {menpeso:.1f}Kg e quem tem esse peso é/são ',end='')
 for n in nomel:
     print(f'{n}',end=' ')
