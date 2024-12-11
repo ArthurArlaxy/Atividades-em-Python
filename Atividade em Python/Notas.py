@@ -1,8 +1,6 @@
 alunos=[]
 dados=[]
-soma= []
 media =[]
-qaluno =[]
 
 print(9*'-=','ANALISADOR DE NOTAS',9*'-=')
 
@@ -26,25 +24,23 @@ while True:
         break
 for g in range(0,len(alunos)):
     for c,n in enumerate(alunos[g]):
-        if c > 0:
+        if c == 1 :
             v = n
-            soma.append(v)
-    m = sum(soma)/nnotas
+        elif c > 1:
+            v += n
+    m = v / nnotas
     media.append(m)
-    soma.clear()
+    v=0
 print('N°       NOME           MEDIA')
 print(50*'=')
 for cont in range(0,len(alunos)): 
     print(f'{cont}{alunos[cont][0]:^20}{media[cont]:^12.1f}')
 print(50*'=')
 
-for n in range(0,len(alunos)):
-    qaluno.append(n)
-
 while True:
     nota = int(input('Deseja mostrar notas de qual aluno(999 para encerrar: '))
     print(50*'-')
-    if nota in qaluno:
+    if nota < len(alunos) and nota >= 0:
         print(f'O {alunos[nota][0]} tirou ',end='')
         for c,n in enumerate(alunos[nota]):
             if nota >= 0:
