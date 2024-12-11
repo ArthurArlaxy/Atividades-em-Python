@@ -18,4 +18,4 @@ while res != 'N':
     if res != 'S' and res != 'N' :
         res = str(input('Resposta invalida, deseja continuar?[Sim/Não]: '))
 print(f'A soma de todos os valores é {s} e a média foi {s/c}')
-print('O maior número foi {} e o menor foi {}'.format(maior,menor))
+print(f'O maior número foi {maior} e o menor foi {menor}')
