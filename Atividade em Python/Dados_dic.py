@@ -20,4 +20,4 @@ print('-='*25)
 print(jogadas_ordenadas)
 print("O ranking ficou: ")
 for c,jogador in enumerate(jogadas_ordenadas):
-    print(f"{c+1}° - {jogador['nome']} tirou {jogador['dado']}")
+    print(f"{c+1}° - {jogador['nome']:5} tirou {jogador['dado']}")
