@@ -11,6 +11,11 @@ print(f'Nome igual a {aluno["nome"]}')
 print(f'Média é igual a {aluno["media"]}')
 
 if aluno['media'] >= 6:
-    print(f'{aluno["nome"]} foi aprovada/o')
+    aluno['situação']= 'aprovado'
+    print(f'{aluno["nome"]} foi {aluno["situação"]}')
+elif aluno['media'] < 6 and aluno['media'] >= 4:
+    aluno['situação']= 'Recuperação'
+    print(f'O {aluno["nome"]} está em {aluno["situação"]}')
 else:
-    print(f'{aluno["nome"]}  foi reprovado/a')
+    aluno['situação']= 'reprovado'
+    print(f'{aluno["nome"]} foi {aluno["situação"]}')
