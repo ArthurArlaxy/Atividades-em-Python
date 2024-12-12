@@ -10,6 +10,7 @@ while True:
 print(f'Nome igual a {aluno["nome"]}')
 print(f'Média é igual a {aluno["media"]}')
 
+print('-='*25)
 if aluno['media'] >= 6:
     aluno['situação']= 'aprovado'
     print(f'{aluno["nome"]} foi {aluno["situação"]}')
