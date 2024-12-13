@@ -44,8 +44,9 @@ print('A lista de pessoas com idade acima da média é:')
 for i in totpessoas:
     if i['idade'] > media:
         for k,v in i.items():
-            print(f'{k:>8} = {v:>4}',end='; ')
+            print(f'{k:>8} = {v:>3}',end='; ')
         print('')
+print('-='*25)
 print('<<  Encerrado  >>')
 
 

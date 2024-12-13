@@ -43,7 +43,5 @@ while True:
             for c,i in enumerate(time[jogador_escolhido]["gols"]):
                 print(f'     No jogo {c+1} ele fez {i}')
             print(f'Foi um total de {time[jogador_escolhido]["total"]} gols')
-
     if jogador_escolhido == -1:
-        break
-        
+        break 
