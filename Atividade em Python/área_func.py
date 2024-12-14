@@ -4,8 +4,8 @@ def area(a ,b):
 
 print('<<<   Controle de área   >>>')
 while True:
-    a = float(input('Digite o comprimento: '))
-    b = float(input('Digite a Largura: '))
+    a = float(input('Digite o comprimento(m): '))
+    b = float(input('Digite a Largura(m): '))
     area(a,b)
     print('-='*25)
     while True:
