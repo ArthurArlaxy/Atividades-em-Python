@@ -33,4 +33,5 @@ while True:
             print('Tente Novamente. ',end='')
     if prom in 'S':
         break
+print('-='*25)
 print('<<<  Encerrado  >>>')
