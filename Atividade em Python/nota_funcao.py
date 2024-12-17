@@ -1,4 +1,10 @@
 def nota(*num,sit=False):
+    """
+    função nota:
+    Cria um dicionário com o total de avaliações, mostra a maior e menor nota,média e situação do aluno.
+    :param num: recebe a quantidade de avaliações
+    :param Sit: se True mostra a situação do aluno
+    """
     lista = list(num)
     resp = {
         'Total': len(lista),

@@ -18,6 +18,6 @@ def pares(num=[]):
             soma += c
     print(f'Somando os valores pares de {num}, temos {soma}')
 
-help(num) 
+num = []
 sorteio()
 pares(num)

@@ -4,7 +4,14 @@ def fatorial(num=1,show=False):
     num = Receber um número
     
     for c in range(num,0,-1)
-        f*=c     --- é responsavel por fazer o fatorial
+
+        if show :                  \
+            if c == 1:              \
+                print(c,end=' = ')    > Se show = True --- mostra o cálculo
+            else:                   /
+                print(c,end=' x ') /
+
+        f*=c  --- é responsavel por fazer o fatorial
     return f  --- Passa o valor para o programa principal
     """
     f = 1
@@ -16,6 +23,7 @@ def fatorial(num=1,show=False):
                 print(c,end=' x ')
         f*=c
     return f
+
 
 print('<<< Calcule o fatorial >>>')
 show = bool
