@@ -6,7 +6,7 @@ gols= str(input('Número de gols: '))
 if gols.isnumeric():
     gols = int(gols)
 else:
-    g=0
+    gols=0
 if nome.strip() =='':
     jogador(Gols=gols)
 else:
