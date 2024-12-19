@@ -2,7 +2,7 @@ def leiaint():
     while True:
         try:    
             r = str(input('Digite um inteiro: ')).strip()
-            int(r)
+            r = int(r)
             break
         except KeyboardInterrupt:
             print(f'\n\033[31mO usuário não digitou\033[m')
@@ -16,7 +16,7 @@ def leiafloat():
     while True:
         try:
             f = str(input('Digite um número real: ')).strip()
-            float(f)
+            f = float(f)
             break
         except KeyboardInterrupt:
             print('\n\033[31mO usuário não digitou\033[m')
