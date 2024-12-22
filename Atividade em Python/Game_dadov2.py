@@ -17,7 +17,7 @@ for c in range(nj):
 jogadas_ordenadas = sorted(jogadas, key=lambda x: x['dado'], reverse=True)
 
 print('-='*25)
-print("====    Ranking dos Jogadores   ====")
+print("====    Ranking dos Jogadores    ====")
 for c,jogador in enumerate(jogadas_ordenadas):
     sleep(0.5)
     print(f"{c+1}° - {jogador['nome']:5} tirou {jogador['dado']}")
