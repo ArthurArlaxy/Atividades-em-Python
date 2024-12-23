@@ -7,17 +7,27 @@ TELA_ALTURA = 800
 IMAGEM_CANO = pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'pipe.png')))
 IMAGEM_CHAO = pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'base.png')))
 IMAGEM_BACKGROUND = pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'bg.png')))
-IMAGENS_PASSARO = [
+TELA_INICIAL = pygame.image.load(os.path.join('imgs', 'Telainicial.png'))
+IMAGENS_PASSARO1 = [
+    pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'frame-1.png'))),
+    pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'frame-2.png'))),
+    pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'frame-3.png')))
+]
+IMAGENS_PASSARO2 = [
     pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'bird1.png'))),
     pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'bird2.png'))),
     pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'bird3.png')))
 ]
 
+
 pygame.font.init()
-FONTE_GAME = pygame.font.SysFont('arial', 50)
+flappy_font = os.path.join('font', 'PressStart2P-Regular.ttf' ) #Fonte importada do Google
+flappy_point = os.path.join('font', 'flappy-bird-font.ttf' ) #Fonte importada estilo Flappy Bird
+FONTE_POINTS = pygame.font.Font(flappy_point, 50)
+FONTE_GAME = pygame.font.Font(flappy_font, 18)
 
 class Passaro:
-    IMGS = IMAGENS_PASSARO
+    IMGS = IMAGENS_PASSARO1
     ROTACAO_MAXIMA = 25
     VELOCIDADE_ROTACAO = 20
     TEMPO_ANIMACAO = 5
@@ -147,6 +157,24 @@ class Chao:
         tela.blit(self.IMAGEM, (self.x1, self.y))
         tela.blit(self.IMAGEM, (self.x2, self.y))
 
+def tela_inicial(tela):
+    tela.blit(TELA_INICIAL, (0, 0))
+    pygame.display.update()
+
+    esperando = True
+    while esperando:
+        pygame.time.wait(10)
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_SPACE:
+                    esperando = False
+                elif evento.key == pygame.K_n:
+                    pygame.quit()
+                    quit()
+
 def desenhar_tela(tela, passaro, canos, chao, pontos):
     tela.blit(IMAGEM_BACKGROUND, (0, 0))
     if passaro:
@@ -154,24 +182,20 @@ def desenhar_tela(tela, passaro, canos, chao, pontos):
     for cano in canos:
         cano.desenhar(tela)
 
-    texto = FONTE_GAME.render(f"Pontuação: {pontos}", 1, (255, 165, 0))
+    texto = FONTE_POINTS.render(f"{pontos}", 1, (255, 255, 255))
     tela.blit(texto, (TELA_LARGURA - 10 - texto.get_width(), 10))
     chao.desenhar(tela)
     pygame.display.update()
 
-def game_over(tela):
-    game_over_text = FONTE_GAME.render('GAME OVER', 1, (255, 165, 0))
-    tela.blit(game_over_text, (TELA_LARGURA // 2 - game_over_text.get_width() // 2, TELA_ALTURA // 2 - game_over_text.get_height() // 2))
-
 def game_over(tela, pontos):
     # Texto de Game Over com pontuação
-    game_over_texto = FONTE_GAME.render('GAME OVER', 1, (255, 165, 0))
-    pontuacao_texto = FONTE_GAME.render(f'Pontuação final: {pontos}', 1, (255, 165, 0))
-    reiniciar_texto = FONTE_GAME.render(f"'Y' para Reiniciar",1, (255, 165, 0))
+    game_over_texto = FONTE_GAME.render('GAME OVER', 1, (255, 255, 255))
+    pontuacao_texto = FONTE_GAME.render(f'Pontuacao final: {pontos}', 1, (255, 255, 255))
+    reiniciar_texto = FONTE_GAME.render(f"'Y' para Reiniciar",1, (255, 255, 255))
     
     tela.blit(game_over_texto, (TELA_LARGURA / 2 - game_over_texto.get_width() / 2, TELA_ALTURA / 2 - game_over_texto.get_height() / 2 - 30))
-    tela.blit(pontuacao_texto, (TELA_LARGURA / 2 - pontuacao_texto.get_width() / 2, TELA_ALTURA / 2 - pontuacao_texto.get_height() / 2 + 30))
-    tela.blit(reiniciar_texto, (TELA_LARGURA / 2 - reiniciar_texto.get_width() / 2, TELA_ALTURA / 2 - reiniciar_texto.get_height() / 2 + 90))
+    tela.blit(pontuacao_texto, (TELA_LARGURA / 2 - pontuacao_texto.get_width() / 2, TELA_ALTURA / 2 - pontuacao_texto.get_height() / 2 + 10))
+    tela.blit(reiniciar_texto, (TELA_LARGURA / 2 - reiniciar_texto.get_width() / 2, TELA_ALTURA / 2 - reiniciar_texto.get_height() / 2 + 50))
 
     pygame.display.update()
 
@@ -188,13 +212,13 @@ def game_over(tela, pontos):
                 elif evento.key == pygame.K_n:
                     pygame.quit()  # Fecha o jogo se pressionar "N"
                     quit()
-        pygame.time.wait(1)  # Um pequeno delay para a tela de game over não desaparecer rapidamente
 
 def main():
     passaro = Passaro(230, 350)
-    chao = Chao(730)
+    chao = Chao(700)
     canos = [Cano(700)]
     tela = pygame.display.set_mode((TELA_LARGURA, TELA_ALTURA))
+    tela_inicial(tela)
     pontos = 0
     relogio = pygame.time.Clock()
 
@@ -235,6 +259,7 @@ def main():
         if passaro.y + passaro.imagem.get_height() > chao.y or passaro.y < 0:
             rodando = False  # Fim do jogo se o pássaro tocar o chão ou sair da tela
 
+
         desenhar_tela(tela, passaro, canos, chao, pontos)
 
         if not rodando:
@@ -242,7 +267,7 @@ def main():
             passaro = Passaro(230, 350)# Reseta o pássaro
             canos = [Cano(700)]#Reseta canos
             pontos = 0#Reseta pontos
-            rodando =True#Reinicia o jogo
+            rodando = True#Reinicia o jogo
 
 if __name__ == '__main__':
     main()
