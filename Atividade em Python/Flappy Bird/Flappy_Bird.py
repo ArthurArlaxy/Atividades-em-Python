@@ -18,7 +18,9 @@ IMAGENS_PASSARO2 = [
     pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'bird2.png'))),
     pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'bird3.png')))
 ]
-
+IMAGEM_PASSAROS = []
+IMAGEM_PASSAROS.append(IMAGENS_PASSARO1[:])
+IMAGEM_PASSAROS.append(IMAGENS_PASSARO2[:])
 
 pygame.font.init()
 flappy_font = os.path.join('font', 'PressStart2P-Regular.ttf' ) #Fonte importada do Google
@@ -26,8 +28,10 @@ flappy_point = os.path.join('font', 'flappy-bird-font.ttf' ) #Fonte importada es
 FONTE_POINTS = pygame.font.Font(flappy_point, 50)
 FONTE_GAME = pygame.font.Font(flappy_font, 18)
 
+
+
 class Passaro:
-    IMGS = IMAGENS_PASSARO1
+    IMGS = IMAGEM_PASSAROS[0]
     ROTACAO_MAXIMA = 25
     VELOCIDADE_ROTACAO = 20
     TEMPO_ANIMACAO = 5
@@ -93,7 +97,7 @@ class Passaro:
         return pygame.mask.from_surface(self.imagem)
 
 class Cano:
-    DISTANCIA = 200
+    DISTANCIA = 220
     VELOCIDADE = 5
 
     def __init__(self, x):
@@ -159,6 +163,7 @@ class Chao:
 
 def tela_inicial(tela):
     tela.blit(TELA_INICIAL, (0, 0))
+
     pygame.display.update()
 
     esperando = True
@@ -174,6 +179,7 @@ def tela_inicial(tela):
                 elif evento.key == pygame.K_n:
                     pygame.quit()
                     quit()
+
 
 def desenhar_tela(tela, passaro, canos, chao, pontos):
     tela.blit(IMAGEM_BACKGROUND, (0, 0))
