@@ -16,4 +16,4 @@ while True:
         print('Tente novamente.',end="")
 print(20*'=-')
 num.sort()
-print(num)
+print(f'Os números inéditos foram {num}')
