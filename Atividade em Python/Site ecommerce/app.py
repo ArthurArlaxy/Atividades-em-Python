@@ -39,6 +39,34 @@ def delete_product(product_id):
     else:
         return jsonify({'message': 'product not found'}), 404      # 404 é para algo não encontrado 
 
+@app.route('/api/products/<int:product_id>', methods=['GET'])
+def get_prudoct_details(product_id):
+    product = Product.query.get(product_id)
+    if product:
+        return jsonify({
+            'id': product.id,
+            'name': product.name,
+            'price': product.price,
+            'description': product.description
+        })
+    return jsonify({'message': 'Not found, product not available' }), 404
+
+@app.route('/api/products/update/<int:product_id>', methods=['PUT'])
+def update_product(product_id):
+    data = request.json
+    if 'name' in data or 'price' in data or 'description' in data:
+        product = Product.query.get(product_id)
+        if product:
+            product.name = data.get('name',product.name)
+            product.price = data.get('price',product.price)
+            product.description = data.get('description', product.description)
+            db.session.commit()
+            return jsonify({'message': 'product updated successfully'})
+        return jsonify({'message': 'Product not found'}), 404
+    return jsonify({'message': 'Invalid product data'}), 400
+
+
+
 
 #Definir uma rota raiz (página inicial) e a função que será executada ao requisitar
 @app.route('/')
