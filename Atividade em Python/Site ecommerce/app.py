@@ -62,7 +62,7 @@ def update_product(product_id):
             product.description = data.get('description', product.description)
             db.session.commit()
             return jsonify({'message': 'product updated successfully'})
-        return jsonify({'message': 'Product not found'}), 404
+        return jsonify({'message': 'Product not found'}), 404     #três retornos diferentes
     return jsonify({'message': 'Invalid product data'}), 400
 
 
