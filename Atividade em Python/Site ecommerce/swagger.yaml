@@ -1,13 +1,35 @@
 swagger: '2.0'
 info:
-  version: 1.0.0
-  title: E-commerce API
+  version: 2.0.0
+  title: E-commerce API (Arthur version)
   description: API for an e-commerce system
 host: 127.0.0.1:5000
 schemes:
-  - http
+  - https
 
 paths:
+
+  /api/user/create:
+    post:
+      summary: Add a new user
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: user created successfully
+        400:
+          description: Failed to create the user
 
   /login:
     post:
@@ -25,12 +47,10 @@ paths:
                 type: string
       responses:
         200:
-          headers: 
+          headers:
             Set-Cookie:
               type: string
-
           description: Logged in successfully
-
         401:
           description: Unauthorized. Invalid credentials
 
@@ -71,7 +91,7 @@ paths:
           schema:
             $ref: '#/definitions/Product'
         404:
-          description: Not Found. Product not available.
+          description: Not Found. Product not available
 
   /api/products/search:
     get:
@@ -90,7 +110,7 @@ paths:
             items:
               $ref: '#/definitions/Product'
         404:
-          description: Not Found. No products found for the search query.
+          description: Not Found. No products found for the search query
 
   /api/products/add:
     post:
@@ -192,7 +212,7 @@ paths:
       summary: Checkout and clear the cart
       responses:
         200:
-          description: Checkout successful. Cart has been cleared.
+          description: Checkout successful. Cart has been cleared
         401:
           description: Unauthorized. User not logged in
 
