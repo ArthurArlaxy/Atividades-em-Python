@@ -1,6 +1,7 @@
 #Importações
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 
 #instancia o Flask
@@ -9,7 +10,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecommerce.db'
 
 db = SQLAlchemy(app)
-
+CORS(app)
 # Modelagem
 
 # Criando o objeto  produto que será armazenada no nosso banco de dados
@@ -65,6 +66,18 @@ def update_product(product_id):
         return jsonify({'message': 'Product not found'}), 404     #três retornos diferentes
     return jsonify({'message': 'Invalid product data'}), 400
 
+@app.route('/api/products', methods= ['GET'])
+def get_products():
+    products = Product.query.all()
+    list_products=[]
+    for product in products:
+        product_info = {
+        'id': product.id,
+        'name': product.name,
+        'price': product.price,
+        }
+        list_products.append(product_info)
+    return jsonify(list_products)
 
 
 
