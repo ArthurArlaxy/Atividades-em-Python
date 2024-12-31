@@ -5,7 +5,7 @@ info:
   description: API for an e-commerce system
 host: 127.0.0.1:5000
 schemes:
-  - https
+  - http
 
 paths:
 
@@ -179,15 +179,15 @@ paths:
         400:
           description: Failed to add item to the cart
 
-  /api/cart/remove/{item_id}:
+  /api/cart/remove/{product_id}:
     delete:
       summary: Remove item from the cart
       parameters:
-        - name: item_id
+        - name: product_id
           in: path
           type: integer
           required: true
-          description: Cart item ID to remove from the cart
+          description: Cart product ID to remove from the cart
       responses:
         200:
           description: Item removed from the cart successfully
@@ -248,7 +248,10 @@ definitions:
     properties:
       id:
         type: integer
-      user_id:
-        type: integer
       product_id:
         type: integer
+      product_name:
+        type: string
+      product_price:
+        type: number
+        format: float
