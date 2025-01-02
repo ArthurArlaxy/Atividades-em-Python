@@ -56,6 +56,10 @@ def add_user():
         return jsonify({'message': 'User created successfully'})
     return jsonify({'message': 'User invalid data'}), 400
 
+@application.route('/api/products/search', methods=['GET'])
+def search_products():
+    pass
+
 @application.route('/login', methods=['POST'])
 def login():
     data = request.json
