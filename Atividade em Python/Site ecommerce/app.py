@@ -5,17 +5,17 @@ from flask_cors import CORS
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 
 #instancia o Flask
-application = Flask(__name__)
+app = Flask(__name__)
 #configura o banco de dados
-application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecommerce.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecommerce.db'
 #configura o chave secreta do LoginManager
-application.config['SECRET_KEY'] = '123456789'
+app.config['SECRET_KEY'] = '123456789'
 
-db = SQLAlchemy(application)
+db = SQLAlchemy(app)
 login_manager = LoginManager()
-login_manager.init_app(application)
+login_manager.init_app(app)
 login_manager.login_view = 'login'
-CORS(application)
+CORS(app)
 # Modelagem
 
 # Criando o objeto  produto que será armazenada no nosso banco de dados
@@ -42,11 +42,11 @@ class CartItem(db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@application.route('/')
+@app.route('/')
 def initial():
-    return 'API ECOMMERCE IS WORKING'
+    return 'WELLCOME, API ECOMMERCE IS WORKING'
 
-@application.route('/api/user/create', methods=['POST'])
+@app.route('/api/user/create', methods=['POST'])
 def add_user():
     data = request.json
     if 'username' in data and 'email' in data and 'password' in data:
@@ -56,11 +56,22 @@ def add_user():
         return jsonify({'message': 'User created successfully'})
     return jsonify({'message': 'User invalid data'}), 400
 
-@application.route('/api/products/search', methods=['GET'])
-def search_products():
-    pass
+@app.route('/api/products/search', methods=['GET'])
+def search_product():
+    query = request.args.get('q')
+    if query:
+        product = Product.query.filter_by(name=query).first()
+        if product:
+            product_data = {
+                'id': product.id,
+                'nome': product.name,
+                'preço': product.price,
+                'descrição': product.description
+            }
+            return jsonify(product_data)
+    return jsonify({'message': 'Not Found. No products found for the search query'}), 404
 
-@application.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     data = request.json
     user = User.query.filter_by(username=data.get('username')).first()
@@ -69,13 +80,13 @@ def login():
         return jsonify({'message': 'Logged in successfully'})
     return jsonify({'message': 'Unauthorized. Invalid credentials'}),401
 
-@application.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['POST'])
 @login_required
 def logout():
     logout_user()
     return jsonify({'message': 'logout successfully'})
 
-@application.route('/api/products/add', methods=["POST"])
+@app.route('/api/products/add', methods=["POST"])
 @login_required     # Na criação das rotas também adicionamos os métodos
 def add_product():
     data = request.json    # request é importado do flask
@@ -86,7 +97,7 @@ def add_product():
         return jsonify({"message": 'Product added correctly'})
     return jsonify({"message": "Invalid product data"}), 400  #jsonify() - retorna um json e o 400 mostra que deu erro
 
-@application.route(f'/api/products/delete/<int:product_id>', methods=["DELETE"])
+@app.route(f'/api/products/delete/<int:product_id>', methods=["DELETE"])
 @login_required
 def delete_product(product_id):
     product =Product.query.get(product_id)
@@ -97,7 +108,7 @@ def delete_product(product_id):
     else:
         return jsonify({'message': 'product not found'}), 404      # 404 é para algo não encontrado 
 
-@application.route('/api/products/<int:product_id>', methods=['GET'])
+@app.route('/api/products/<int:product_id>', methods=['GET'])
 def get_prudoct_details(product_id):
     product = Product.query.get(product_id)
     if product:
@@ -109,7 +120,7 @@ def get_prudoct_details(product_id):
         })
     return jsonify({'message': 'Not found, product not available' }), 404
 
-@application.route('/api/products/update/<int:product_id>', methods=['PUT'])
+@app.route('/api/products/update/<int:product_id>', methods=['PUT'])
 @login_required
 def update_product(product_id):
     data = request.json
@@ -124,7 +135,7 @@ def update_product(product_id):
         return jsonify({'message': 'Product not found'}), 404     #três retornos diferentes
     return jsonify({'message': 'Invalid product data'}), 400
 
-@application.route('/api/products', methods= ['GET'])
+@app.route('/api/products', methods= ['GET'])
 def get_products():
     products = Product.query.all()
     list_products=[]
@@ -137,7 +148,7 @@ def get_products():
         list_products.append(product_info)
     return jsonify(list_products)
 
-@application.route('/api/cart/add/<int:product_id>', methods=['POST'])
+@app.route('/api/cart/add/<int:product_id>', methods=['POST'])
 @login_required
 def add_to_cart(product_id):
     user = User.query.get(int(current_user.id))     # Usuário
@@ -149,7 +160,7 @@ def add_to_cart(product_id):
         return jsonify({'message': 'Item added to the cart successfully'})
     return jsonify({'message': 'Failed to add item to the cart'}), 400
 
-@application.route('/api/cart/remove/<int:product_id>', methods=['DELETE'])
+@app.route('/api/cart/remove/<int:product_id>', methods=['DELETE'])
 @login_required
 def remove_from_cart(product_id):
     cart_item = CartItem.query.filter_by(user_id=current_user.id,product_id= product_id).first()
@@ -159,7 +170,7 @@ def remove_from_cart(product_id):
         return jsonify ({'message': 'Product deleted from cart'})
     return jsonify ({'message': 'Failed to remove item from the cart'}), 400
 
-@application.route('/api/cart',methods=['GET'])
+@app.route('/api/cart',methods=['GET'])
 @login_required
 def view_cart_items():
     cart = []
@@ -175,7 +186,7 @@ def view_cart_items():
         cart.append(cart_item_info)
     return jsonify (cart)
 
-@application.route('/api/cart/checkout', methods=['POST'])
+@app.route('/api/cart/checkout', methods=['POST'])
 @login_required
 def checkout():
     user = User.query.get(current_user.id)
@@ -186,4 +197,4 @@ def checkout():
     return jsonify({'messager': 'Checkout successfully. Cart has been cleared'})
 
 if __name__ == '__main__':
-    application.run(debug=True)
+    app.run(debug=True)
