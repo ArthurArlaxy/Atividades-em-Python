@@ -21,6 +21,10 @@ class BancoDeDados():
     def listar(self):
         for id, aluno in self.base.items():
             print(f"ID: {id}, Nome: {aluno.nome}, Idade: {aluno.idade}, Turma: {aluno.turma}")
+    
+    def deletar(self):
+        id = int(input('Que Aluno deseja remover?'))
+        del self.base[id]
 
 banco = BancoDeDados()
 aluno1 = Aluno()
@@ -30,4 +34,5 @@ banco.listar()
 aluno2 = Aluno()
 aluno2.pegar_info()
 banco.adicionar(aluno2)
+banco.deletar()
 banco.listar()
