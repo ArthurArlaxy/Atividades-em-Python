@@ -6,8 +6,15 @@ class Aluno():
     
     def pegar_info(self):
         self.nome = str(input('NOME:'))
-        self.idade = int(input('IDADE:'))
-        self.turma = str(input('Turma'))
+        while True:
+            try:
+                self.idade = int(input('IDADE:'))
+                if self.idade < 0:
+                    raise print('Não existe idade negativa.', end='')
+                break
+            except:
+                print('Tipo invalido, ',end='')
+        self.turma = str(input('Turma: '))
 
 class BancoDeDados():
     def __init__(self):
@@ -24,7 +31,23 @@ class BancoDeDados():
     
     def deletar(self):
         id = int(input('Que Aluno deseja remover?'))
-        del self.base[id]
+        if id in self.base:
+            while True:
+                confirmacao = input(f"Você tem certeza que deseja remover o aluno com ID {id}? (s/n): ").strip().lower()[0]
+                if confirmacao in 'sn':
+                    if confirmacao in 's':
+                        del self.base[id]
+                        print(f"Aluno com ID {id} removido.")
+                        break
+                    else:
+                        print("Operação cancelada.")
+                        break
+                else:
+                    print('Resposta invalida. ',end='')
+        else:
+            print("ID inválido.")
+
+
 
 banco = BancoDeDados()
 aluno1 = Aluno()
