@@ -46,6 +46,22 @@ class BancoDeDados():
                     print('Resposta invalida. ',end='')
         else:
             print("ID inválido.")
+    
+    def update(self):
+        id= int(input('Que aluno você deseja atualizar com o ID: '))
+        if id in self.base:
+            aluno = self.base[id]
+            nome = str(input(f'Nome: {aluno.nome}, Novo nome:')).strip()
+            if nome:
+                aluno.nome = nome
+            idade = str(input(f'Idade: {aluno.idade}, Novo idade:')).strip()
+            if idade:
+                aluno.idade = idade
+            turma = str(input(f'turma: {aluno.turma}, Novo Turma:')).strip()
+            if turma:
+                aluno.turma = turma
+        else:
+            print('Aluno não encontrado')
 
 
 
