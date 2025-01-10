@@ -9,5 +9,5 @@ while c != 999:
     soma = soma + c 
 cn = cn - 1 
 soma = soma - 999
-print('O resultado da soma é {}'.format(soma))
-print('Foram contados {} números'.format(cn))
+print(f'O resultado da soma é {soma}')
+print(f'Foram contados {cn} números')
