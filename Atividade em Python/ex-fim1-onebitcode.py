@@ -42,6 +42,8 @@ def listarJogadores():
     if id < len(times) and id >= 0:
         nomeTime = list(times[id].keys())[0]
         print(f'Os jogadores presentes no time {nomeTime} são {times[id][nomeTime]}')
+        for n,jogador in enumerate(times[id][nomeTime]):
+            print(f'{n}. {jogador}')
 
 times = [
     {'Flamengo': ['Arrascaeta', 'Nico', 'Pedro', 'Cebolinha','beijinho']},
@@ -50,7 +52,4 @@ times = [
 ]
 
 listar(times)
-addTime()
-removerTime()
-addJogador()
-removeJogador()
+listarJogadores()
