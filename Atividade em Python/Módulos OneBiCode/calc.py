@@ -13,3 +13,7 @@ def mult(a,b):
 def div(a,b):
     result = a / b
     return result
+
+def power(a,b):
+    result = a ** b
+    return result
