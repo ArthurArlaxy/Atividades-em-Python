@@ -53,3 +53,4 @@ times = [
 
 listar(times)
 listarJogadores()
+removeJogador()
