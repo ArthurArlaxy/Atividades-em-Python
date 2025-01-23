@@ -17,7 +17,7 @@ function alterarElementosPagina(tag, texto) {
 
 function textoInicial(){
     alterarElementosPagina('h1', 'Jogo do número secreto');
-    alterarElementosPagina('p', `Escolha um número de 0 a 10`);
+    alterarElementosPagina('p', `Escolha um número de 0 a 100`);
 }
 
 textoInicial()
