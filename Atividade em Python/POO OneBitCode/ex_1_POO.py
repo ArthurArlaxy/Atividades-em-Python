@@ -18,7 +18,7 @@ class Movie:
         print(f'Includo: {self.includedPlan}')
         print(f'Note: {self.note}')
         print(f'Duração do Filme: {self.durationMinutes}')
-        print(f'Total de Avaliadores: {self.totalAvaliation}\n')
+        print(f'Total de Avaliadores: {self.totalEvaluators}\n')
     
     def avaliationNote(self):
         note = float(input(f'Digite sua nota para o filme {self.name}: '))
