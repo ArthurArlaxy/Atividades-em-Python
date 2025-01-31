@@ -6,4 +6,4 @@ def Leitura_de_arquivos(arquivo, linhas):
         for line in islice(file, linhas):
             print(line.rstrip())
 
-Leitura_de_arquivos('texto.txt', 2)
+Leitura_de_arquivos('texto.txt', 2) 
